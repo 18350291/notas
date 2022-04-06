@@ -8,7 +8,6 @@ function App() {
     nota: "",
   });
 
-
   const handleInputChange = (event) => {
     setInputState({
       ...inputState,
@@ -16,6 +15,16 @@ function App() {
     });
 
   };
+
+  const handleResetClick = () =>{
+    setInputState({
+      ...inputState,
+      titulo: "",
+      fecha: "",
+      nota: "",
+    });
+
+  }
   
   return (
     <div className="App">
@@ -46,6 +55,15 @@ function App() {
         onChange = {handleInputChange}
         value = {inputState.nota}
       />
+
+      <br></br>
+      <button
+        type="button"
+        onClick={handleResetClick}
+
+      >
+        Reinicio
+      </button>
 
     </div>
   );
