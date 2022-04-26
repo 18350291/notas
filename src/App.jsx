@@ -25,6 +25,10 @@ function App() {
     });
 
   }
+
+  const handleClickGuardar =() =>{
+    localStorage.setItem("notas", JSON.stringify(inputState));
+  }
   
   return (
     <div className="App container">
@@ -32,7 +36,7 @@ function App() {
         <div className="col">
           <h3>Lista</h3>
         </div>
-        
+
         <div className="col">
         <h3>Hola</h3>
         <label className="mb-2">
@@ -65,21 +69,40 @@ function App() {
             type = "text" 
             onChange = {handleInputChange}
             value = {inputState.nota}
+            style = {{width: "100%"}}
+
         /></label>
-        
+
+      <hr></hr>
+      <div className="ms-2 me-2 mt-2 row">
+
+      <div className="col">
+        <span className="row me-1">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={handleResetClick}
+          >
+            Limpiar
+          </button>
+          </span>
+        </div>
+
+        <div className="col">
+          <span className="row ms-1">
+          
+          <button 
+            type="button"
+            className="btn btn-secondary"
+            onClick={handleClickGuardar}>
+            Guardar
+          </button>
+          </span>
+
+            </div>
+          </div>
         </div>
       </div>
-      <hr></hr>
-      <div className="ms-2 mt-2">
-
-      <button
-        type="button"
-        onClick={handleResetClick}
-      >
-        Reinicio
-      </button>
-      </div>
-
     </div>
   );
 }
