@@ -27,7 +27,11 @@ function App() {
   }
 
   const handleClickGuardar =() =>{
-    localStorage.setItem("notas", JSON.stringify(inputState));
+    let arregloNotas = JSON.parse(localStorage.getItem("notas")) || []
+    arregloNotas.push(inputState)
+
+    localStorage.setItem("notas", JSON.stringify(arregloNotas));
+    handleResetClick();
   }
   
   return (
