@@ -16,7 +16,6 @@ function App() {
       ...inputState,
       [event.target.name]: event.target.value,
     });
-
   };
 
   const handleResetClick = () =>{
@@ -29,9 +28,9 @@ function App() {
   }
 
   const handleClickGuardar =() =>{
+    localStorage.setItem("notas", JSON.stringify([...notas, inputState]));
     setnotas([...notas, inputState])
 
-    localStorage.setItem("notas", JSON.stringify(notas));
     handleResetClick();
   }
 
@@ -44,6 +43,12 @@ function App() {
     });
     localStorage.setItem("notas",JSON.stringify(nuevoArreglo));
     setnotas([...nuevoArreglo])  
+  }
+
+  const handleVaciarListas = ()=>{
+    setnotas([]);
+    localStorage.setItem("notas",JSON.stringify([]));
+   
   }
   
   return (
@@ -68,8 +73,17 @@ function App() {
                 )
               }
             )}
-            </ol>  
+            </ol>
           }
+          <span className="row ms-1">
+            <button 
+              type="button"
+              className="btn btn-secondary"
+              onClick={handleVaciarListas}
+              disabled={notas.length===0}>
+              Vaciar listas
+            </button>
+          </span>
         </div>
 
         <div className="col">
@@ -91,12 +105,12 @@ function App() {
             id = "fecha" 
             name = "fecha" 
             type = "date" 
-            onChange = {handleInputChange}
+              onChange = {handleInputChange}
             value = {inputState.fecha}
         /></label>
         
         <br></br>
-        <label htmlfor = "nota">
+        <label htmlFor = "nota">
           Nota
           <textarea 
             id = "nota" 
@@ -116,6 +130,11 @@ function App() {
             type="button"
             className="btn btn-secondary"
             onClick={handleResetClick}
+            disabled={
+              inputState.titulo==='' ||
+              inputState.fecha===''||
+              inputState.nota===''
+              }
           >
             Limpiar
           </button>
@@ -128,7 +147,12 @@ function App() {
           <button 
             type="button"
             className="btn btn-secondary"
-            onClick={handleClickGuardar}>
+            onClick={handleClickGuardar}
+            disabled={
+              inputState.titulo==='' ||
+              inputState.fecha===''||
+              inputState.nota===''
+              }>
             Guardar
           </button>
           </span>
